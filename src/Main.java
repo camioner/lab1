@@ -31,9 +31,20 @@ import java.util.Scanner;
 
      class BigVigenere {
         private int key[];
-        private char[][] alphabet;
+        private char[][] alphabet= new char[64][64];
+        String alphanumeric = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-        public BigVigenere() {
+        for (int i = 0; i < alphanumeric.length(); i++) {  // Filas
+                for (int j = 0; j < alphanumeric.length(); j++) {  // Columnas
+                    alphabet[i][j] = alphanumeric.charAt((i + j) % alphanumeric.length());
+                }
+        }
+
+
+
+
+
+         public BigVigenere() {
             System.out.println(" ingrese la clave ");
             Scanner input= new Scanner(System.in);
             String Skey=input.nextLine();
