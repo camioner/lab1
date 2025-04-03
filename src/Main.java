@@ -29,43 +29,48 @@ import java.util.Scanner;
 //        //matriz del alfabeto para el algoritmo Vigenère.
 //    }
 
-     class BigVigenere {
-        private int key[];
-        private char[][] alphabet= new char[64][64];
-        String alphanumeric = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+class BigVigenere {
+    private int key[];
+    private char[][] alphabet= new char[64][64];
+    String alphanumeric = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-        for (int i = 0; i < alphanumeric.length(); i++) {  // Filas
-                for (int j = 0; j < alphanumeric.length(); j++) {  // Columnas
-                    alphabet[i][j] = alphanumeric.charAt((i + j) % alphanumeric.length());
-                }
+    public BigVigenere() {
+        System.out.println(" ingrese la clave ");
+        Scanner input= new Scanner(System.in);
+        String Skey=input.nextLine();
+        input.close();
+        this.key= new int[Skey.length()];
+        //llenamois key[] con la clave por separado
+        for (int i = 0; i < Skey.length(); i++) {
+            this.key[i] = Character.getNumericValue(Skey.charAt(i));
         }
-
-
-
-
-
-         public BigVigenere() {
-            System.out.println(" ingrese la clave ");
-            Scanner input= new Scanner(System.in);
-            String Skey=input.nextLine();
-
-            this.key= new int[Skey.length()];
-
-            for (int i = 0; i < Skey.length(); i++) {
-                this.key[i] = Character.getNumericValue(Skey.charAt(i));
+        //esto llena alphabet con alphanumeric en forma de espiral , es una matrisz de 64x64
+        for (int i = 0; i < alphanumeric.length(); i++) {
+            for (int j = 0; j < alphanumeric.length(); j++) {
+                alphabet[i][j] = alphanumeric.charAt((i + j) % alphanumeric.length());
             }
+        }
+        input.close();
 
-            input.close();
 
+    }
+    public BigVigenere(String numericKey){
+
+        //llenamois key[] con la clave por separado
+        for (int i = 0; i < Skey.length(); i++) {
+            this.key[i] = Character.getNumericValue(Skey.charAt(i));
         }
     }
 
-    public class Main {
-        public static void main(String[] args) {
-            //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-            // to see how IntelliJ IDEA suggests fixing it.
-            System.out.printf("Hello and welcome!");
-            BigVigenere cifrado = new BigVigenere();
+}
 
-        }
+
+public class Main {
+    public static void main(String[] args) {
+        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
+        // to see how IntelliJ IDEA suggests fixing it.
+        System.out.printf("Hello and welcome!");
+        BigVigenere cifrado = new BigVigenere();
+
     }
+}
