@@ -31,7 +31,6 @@ class BigVigenere {
                 alphabet[i][j] = alphanumeric.charAt((i + j) % alphanumeric.length());
             }
         }
-        new BigVigenere(mnsj);
 
 
     }
@@ -43,7 +42,7 @@ class BigVigenere {
 
         //llenamois key[] con la clave por separado
         for (int i = 0; i < numericKey.length(); i++) {
-            this.key[i] = Character.getNumericValue(numericKey.indexOf(i));
+            this.key[i] = Character.getNumericValue(numericKey.charAt(i));
         }
     }
 
@@ -54,7 +53,8 @@ class BigVigenere {
         for (int i = 0; i < message.length(); i++) {
             encrypted[i] = alphabet[findPos(message.charAt(i), 0)][key[i % key.length]];
         }
-        return encrypted.toString();
+        return new String(encrypted);
+
     }
 
     public String decrypt(String encryptedMessage) {
@@ -65,7 +65,8 @@ class BigVigenere {
             int basepos = findPos(encryptedMessage.charAt(i), pos);
             resultado.append(alphabet[0][basepos]);
         }
-        return resultado.toString();
+        return new String(resultado);
+
     }
 
     public void reEncrypt(String encryptedMessage) {
@@ -78,7 +79,7 @@ class BigVigenere {
                 return i;
             }
         }
-        return -1;
+        return 0;
     }
 
 }
