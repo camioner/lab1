@@ -100,7 +100,13 @@ class BigVigenere {
         return 0;
     }
 
+    public char optimalSearch(int position) {
+//        Método que realiza la búsqueda del carácter corres -
+//       pondiente de acuerdo a la posición indicada.Se busca realizar una búsqueda más eficiente que el caso
+//        anterior.
 
+        return 0;
+    }
 
 }
 
