@@ -78,7 +78,7 @@ class BigVigenere {
     public void reEncrypt(String encryptedMessage) {
         System.out.println("introduzca una nueva clave :");
         Scanner input = new Scanner(System.in);
-        this.input = new Scanner(System.in);
+        input = new Scanner(System.in);
         String clave = input.nextLine();
 
         BigVigenere newkey = new BigVigenere(clave);
