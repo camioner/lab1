@@ -77,13 +77,16 @@ class BigVigenere {
 
     public void reEncrypt(String encryptedMessage) {
         System.out.println("introduzca una nueva clave :");
+
         Scanner input = new Scanner(System.in);
         String clave = input.nextLine();
 
         BigVigenere newkey = new BigVigenere(clave);
-        String encriptagain = encrypt(encryptedMessage);
+
+        String encriptagain = newkey.encrypt(encryptedMessage);
         System.out.println("nuevo cifrado: " + encriptagain);
 
+        input.close();
     }
 
     private int findPos(char target, int e) {
