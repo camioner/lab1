@@ -100,13 +100,21 @@ class BigVigenere {
         return 0;
     }
 
-    public char optimalSearch(int position) {
+
 //        Método que realiza la búsqueda del carácter corres -
 //       pondiente de acuerdo a la posición indicada.Se busca realizar una búsqueda más eficiente que el caso
 //        anterior.
+    public char optimalSearch(int position) {
+        if (position < 0 || position >= 4096) { // 64*64 = 4096
+            throw new IllegalArgumentException("Posición fuera de rango.");
+        }
 
-        return 0;
+        int fila = position / 64;
+        int columna = position % 64;
+
+        return alphabet[fila][columna];
     }
+
 
 }
 
