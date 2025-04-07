@@ -17,7 +17,7 @@ class BigVigenere {
         String mnsj = input.nextLine();
 
         this.key = new int[Skey.length()];
-        //no recuerdo para q era esto xd
+        // Convertimos la clave String a arreglo de enteros
         for (int i = 0; i < Skey.length(); i++) {
             this.key[i] = Character.getNumericValue(Skey.charAt(i));
         }
