@@ -49,7 +49,6 @@ class BigVigenere {
             this.key[i] = Character.getNumericValue(numericKey.charAt(i));
         }
 
-        //si no se inicializa otra vez el alphabeto , no logra cifrar dnvo
         for (int i = 0; i < alphanumeric.length(); i++) {
             for (int j = 0; j < alphanumeric.length(); j++) {
                 alphabet[i][j] = alphanumeric.charAt((i + j) % alphanumeric.length());
