@@ -36,7 +36,6 @@ class BigVigenere {
         System.out.println("Mensaje descifrado: " + descifrado);
 
         reEncrypt(cifrado);
-        System.out.println("Mensaje reencriptado: ");
 
 
         input.close();
@@ -44,9 +43,17 @@ class BigVigenere {
     }
 
     public BigVigenere(String numericKey) {
+        this.key = new int[numericKey.length()];
         //llenamois key[] con la clave por separado
         for (int i = 0; i < numericKey.length(); i++) {
             this.key[i] = Character.getNumericValue(numericKey.charAt(i));
+        }
+
+        //si no se inicializa otra vez el alphabeto , no logra cifrar dnvo
+        for (int i = 0; i < alphanumeric.length(); i++) {
+            for (int j = 0; j < alphanumeric.length(); j++) {
+                alphabet[i][j] = alphanumeric.charAt((i + j) % alphanumeric.length());
+            }
         }
     }
 
@@ -83,13 +90,16 @@ class BigVigenere {
 
         BigVigenere newkey = new BigVigenere(clave);
 
-        String encriptagain = newkey.encrypt(encryptedMessage);
+        String newmsj = this.decrypt(encryptedMessage);
+
+        String encriptagain = newkey.encrypt(newmsj);
+
         System.out.println("nuevo cifrado: " + encriptagain);
 
         input.close();
     }
 
-    private int findPos(char target, int e) {
+    public int findPos(char target, int e) {
 
         for (int i = 0; i < 64; i++) {
             if (alphabet[e][i] == target) {
@@ -100,10 +110,18 @@ class BigVigenere {
         return 0;
     }
 
+    public char search(int position) {
+        for (int i = 0; i < alphabet.length; i++) {
+            for (int j = 0; j < alphabet.length; j++) {
+                if (position == i * alphabet.length + j) {
+                    return alphabet[i][j];
+                }
+            }
+        }
+        return 0;
+    }
 
-//        Método que realiza la búsqueda del carácter corres -
-//       pondiente de acuerdo a la posición indicada.Se busca realizar una búsqueda más eficiente que el caso
-//        anterior.
+
     public char optimalSearch(int position) {
         if (position < 0 || position >= 4096) { // 64*64 = 4096
             throw new IllegalArgumentException("Posición fuera de rango.");
@@ -125,6 +143,25 @@ public class Main {
         // to see how IntelliJ IDEA suggests fixing it.
         System.out.printf("Hello and welcome!");
         BigVigenere cifrado = new BigVigenere();
+
+        // Medir tiempo de ejecución de search
+        int testPosition = 1000;
+
+        long startSearch = System.nanoTime();
+        char resultSearch = cifrado.search(testPosition);
+        long endSearch = System.nanoTime();
+        long durationSearch = endSearch - startSearch;
+
+        System.out.println("search(" + testPosition + ") = '" + resultSearch + "' en " + durationSearch + " ns");
+
+        // Medir tiempo de ejecución de optimalSearch
+        long startOptimal = System.nanoTime();
+        char resultOptimal = cifrado.optimalSearch(testPosition);
+        long endOptimal = System.nanoTime();
+        long durationOptimal = endOptimal - startOptimal;
+
+        System.out.println("optimalSearch(" + testPosition + ") = '" + resultOptimal + "' en " + durationOptimal + " ns");
+
 
     }
 }
